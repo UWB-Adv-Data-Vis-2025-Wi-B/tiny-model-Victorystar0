@@ -64,3 +64,4 @@ species_lm <- lm(rate ~ temp + species, crickets)
 
 summary.lm(species_lm)
 ```
+This graph shows the interraction between temperature and chirp rates of two species of crickets.
