@@ -27,9 +27,9 @@ In this report, we examine what factors predict a cricket's chirp rate.
 
 ```{r summary, echo = FALSE}
 summary(crickets)
-ggplot(crickets, aes(x = rate)) +
-  geom_histogram(bins = 8) + 
-  ggtitle("Distribution of the chirp rate of crickets") +
+ggplot(crickets, aes(x = rate, fill = species)) +
+  geom_histogram(position = 'identity', alpha = 0.7, bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets by species") +
   xlab('Chirp rate (per min.)')
 ```
 
@@ -65,3 +65,22 @@ species_lm <- lm(rate ~ temp + species, crickets)
 summary.lm(species_lm)
 ```
 This graph shows the interraction between temperature and chirp rates of two species of crickets.
+
+## Interactions
+
+```{r interactions, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+  
+species_x_temp_lm <- lm(rate ~ temp + species + temp:species, crickets) 
+summary.lm(species_x_temp_lm)
+
+anova(species_lm, species_x_temp_lm)
+```
+
+I checked for interactions but decided to stay with the species model.
+
