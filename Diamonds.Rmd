@@ -1,0 +1,27 @@
+---
+title: "Diamonds"
+author: "Nick Sykes"
+date: "2025-02-17"
+output: html_document
+---
+```{r linreg, echo= FALSE}
+library(ggplot2)
+data(diamonds)
+
+str(diamonds)
+model <- lm(price ~ carat + cut + color, data = diamonds)
+summary(model)
+```
+
+# Plot carat vs. price with a regression line
+```{r, echo= FALSE}
+p <- ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", color = "blue") +
+  ggtitle("Diamond Price vs. Carat") +
+  xlab("Carat") +
+  ylab("Price") +
+  theme_minimal()
+
+print(p)
+```
