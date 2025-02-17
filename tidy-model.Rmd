@@ -19,3 +19,4 @@ This R Markdown document demonstrates my abilities to use models for data analys
 data(crickets, package = "modeldata")
 names(crickets)
 ```
+
